@@ -1,0 +1,12 @@
+name = "flodesk-mcp-server"
+compatibility_date = "2024-01-01"
+main = "dist/agents-style.js"
+compatibility_flags = ["nodejs_compat"]
+
+[[durable_objects.bindings]]
+name = "MCP_OBJECT"
+class_name = "MyMCP"
+
+[vars]
+# Environment variables will be set through Cloudflare dashboard
+# FLODESK_API_KEY = "your-api-key-here"
