@@ -140,17 +140,25 @@ export default {
           });
         }
 
-        // For POST requests, require authentication
+        // For POST requests, require authentication (except initialize)
         if (request.method === 'POST' && !userProps) {
           // Check if this is an initialize request (allowed without auth)
           try {
             const body = await request.clone().text();
             const mcpRequest = JSON.parse(body);
+            
+            // Log the authentication attempt for debugging
+            console.log(`MCP Request without auth: ${mcpRequest.method}`, {
+              hasAuthHeader: !!authHeader,
+              authHeaderType: authHeader ? authHeader.substring(0, 10) + '...' : 'none',
+              clientHeaders: Object.fromEntries(request.headers.entries())
+            });
+            
             if (mcpRequest.method !== 'initialize') {
               return new Response(JSON.stringify({
                 jsonrpc: '2.0',
                 id: mcpRequest.id || null,
-                error: { code: -32001, message: 'Authentication required' }
+                error: { code: -32001, message: 'Authentication required - missing Bearer token' }
               }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json', ...corsHeaders }
