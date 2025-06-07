@@ -1,8 +1,0 @@
-name = "flodesk-mcp-server"
-main = "dist/index.js"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
-
-[vars]
-# For local development, you can use a .dev.vars file.
-# For production, set secrets using `npx wrangler secret put FLODESK_API_KEY`.

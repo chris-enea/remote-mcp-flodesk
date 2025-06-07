@@ -1,6 +1,0 @@
-# GitHub OAuth Configuration (for local development)
-GITHUB_CLIENT_ID="your-github-oauth-app-client-id"
-GITHUB_CLIENT_SECRET="your-github-oauth-app-client-secret"
-
-# Flodesk API Configuration
-FLODESK_API_KEY="your-flodesk-api-key"
