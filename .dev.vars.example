@@ -4,5 +4,3 @@ GITHUB_CLIENT_SECRET="your-github-oauth-app-client-secret"
 
 # Flodesk API Configuration
 FLODESK_API_KEY="your-flodesk-api-key"
-
-ALLOWED_USERS=your-github-username,another-user
