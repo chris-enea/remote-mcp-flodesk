@@ -10,11 +10,15 @@
     "build": "wrangler deploy --dry-run"
   },
   "dependencies": {
+    "@cloudflare/agents-repo": "github:cloudflare/agents#5881c5d23a7f4580600029f69307cfc94743e6b8",
     "@cloudflare/workers-oauth-provider": "^0.0.5",
     "@cloudflare/workers-types": "^4.20241218.0",
     "@modelcontextprotocol/sdk": "^1.0.2",
+    "agents": "^0.0.94",
     "hono": "^4.7.11",
     "octokit": "^5.0.3",
+    "toucan-js": "^4.1.1",
+    "workers-mcp": "^0.0.13",
     "zod": "^3.23.8"
   },
   "devDependencies": {

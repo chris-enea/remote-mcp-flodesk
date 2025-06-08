@@ -1,6 +1,7 @@
 name = "flodesk-remote-mcp"
 main = "src/index.ts"
 compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
 
 [env.production]
 name = "flodesk-remote-mcp"
@@ -8,16 +9,26 @@ name = "flodesk-remote-mcp"
 [env.development]
 name = "flodesk-remote-mcp-dev"
 
-[durable_objects]
-bindings = [
-  { name = "SESSIONS", class_name = "SessionStorage" }
-]
-
-[[migrations]]
-tag = "v1"
-new_sqlite_classes = [ "SessionStorage" ]
-
+# KV Namespaces
 [[kv_namespaces]]
 binding = "FLODESK_KV"
 id = "01e45bfe15c34e24a3a4e0a0f4311593"
 preview_id = "d09135afc6d94eb0b94207edb41c240d"
+
+[[kv_namespaces]]
+binding = "OAUTH_KV"
+id = "aeeb1b93ce6449c8a996ccf4742d6ed0"
+preview_id = "8cac3c5bcdd340048ee7412545b525a5"
+
+[observability]
+enabled = true
+
+[dev]
+port = 8788
+
+[durable_objects]
+bindings = [{ name = "MCP_OBJECT", class_name = "MyMCP" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MyMCP"]

@@ -99,7 +99,7 @@ export class FlodeskAPI {
 
     const responseData = await response.json();
     console.log(`Successful response:`, responseData);
-    return responseData;
+    return responseData as FlodeskApiResponse<T>;
   }
 
   async addSubscriber(

@@ -4,7 +4,7 @@ A remote Model Context Protocol (MCP) server for interacting with the Flodesk AP
 
 ## Features
 
-- 🔐 OAuth authentication with GitHub
+- 🔐 OAuth authentication with Google
 - ✉️ Complete Flodesk subscriber management
 - 🏷️ Segment creation and management
 - 🔍 Subscriber search functionality
@@ -27,7 +27,7 @@ A remote Model Context Protocol (MCP) server for interacting with the Flodesk AP
 
 - [Cloudflare account](https://cloudflare.com)
 - [Flodesk account](https://flodesk.com) and API key
-- [GitHub account](https://github.com) for OAuth
+- [Google account](https://console.cloud.google.com/) for OAuth
 - [Node.js](https://nodejs.org) 18+
 
 ### Installation
@@ -43,28 +43,24 @@ cp .dev.vars.example .dev.vars
 ```
 
 3. Configure your `.dev.vars` file with:
-   - GitHub OAuth app credentials
+   - Google OAuth app credentials
    - Flodesk API key
 
-### GitHub OAuth Setup
+### Google OAuth Setup
 
 #### Local Development
-1. Go to [GitHub Settings > Developer settings](https://github.com/settings/developers)
-2. Create a new OAuth App with:
-   - **Application name**: `Flodesk MCP Server (local)`
-   - **Homepage URL**: `http://localhost:8787`
-   - **Authorization callback URL**: `http://localhost:8787/callback`
-3. Add the Client ID and Secret to your `.dev.vars` file
+1. Go to the [Google API Console](https://console.cloud.google.com/apis/credentials)
+2. Create a new OAuth 2.0 Client ID for a "Web application".
+3. Add an authorized redirect URI: `http://localhost:8788/callback` (Note: port is 8788 as per wrangler.toml)
+4. Copy the Client ID and Client Secret to your `.dev.vars` file.
 
 #### Production
-1. Create another OAuth App for production:
-   - **Application name**: `Flodesk MCP Server (production)`
-   - **Homepage URL**: `https://your-worker.your-account.workers.dev`
-   - **Authorization callback URL**: `https://your-worker.your-account.workers.dev/callback`
-2. Set the production secrets:
+1. Create another OAuth 2.0 Client ID for production.
+2. Add the authorized redirect URI for your production worker: `https://your-worker.your-account.workers.dev/callback`
+3. Set the production secrets using Wrangler:
 ```bash
-wrangler secret put GITHUB_CLIENT_ID
-wrangler secret put GITHUB_CLIENT_SECRET
+wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET
 wrangler secret put FLODESK_API_KEY
 ```
 
@@ -75,7 +71,7 @@ Start the development server:
 npm start
 ```
 
-Your MCP server will be available at `http://localhost:8787/sse`
+Your MCP server will be available at `http://localhost:8788/sse`
 
 ### Testing with MCP Inspector
 
@@ -85,8 +81,8 @@ npx @modelcontextprotocol/inspector@latest
 ```
 
 2. Open http://localhost:5173 in your browser
-3. Connect to `http://localhost:8787/sse`
-4. Complete the GitHub OAuth flow
+3. Connect to `http://localhost:8788/sse`
+4. Complete the Google OAuth flow
 5. Test the available tools
 
 ### Deployment
